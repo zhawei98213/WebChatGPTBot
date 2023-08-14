@@ -1,0 +1,24 @@
+classDiagram
+    class ChatBot{
+        +str api_key
+        +str model
+        +dict usage
+        +__init__(api_key: str, model: str)
+        +get_usage(): dict
+        +send_message(message: str): dict
+    }
+    class Config{
+        +str api_key
+        +str model
+        +int refresh_time
+        +__init__(config_file: str)
+        +load_config(): None
+    }
+    class ChatApp{
+        +ChatBot chatbot
+        +Config config
+        +__init__(config: Config)
+        +run(): None
+    }
+    ChatApp "1" -- "1" ChatBot: uses
+    ChatApp "1" -- "1" Config: uses

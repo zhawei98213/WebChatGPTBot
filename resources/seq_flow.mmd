@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant M as Main
+    participant C as Config
+    participant CA as ChatApp
+    participant CB as ChatBot
+    M->>C: Create Config
+    C-->>M: Return Config
+    M->>CA: Create ChatApp with Config
+    CA->>CB: Create ChatBot with Config
+    CB-->>CA: Return ChatBot
+    CA-->>M: Return ChatApp
+    M->>CA: Run ChatApp
+    CA->>CB: Send message to ChatBot
+    CB-->>CA: Return response
+    CA-->>M: Display response

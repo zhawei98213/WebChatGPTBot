@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</head>
+<body>
+    <div class="app">
+        <div class="chat-window">
+            <div id="chat-messages">
+            <!-- 消息列表 -->
+            </div>
+            <div class="chat-input">  
+                <form id="chat-form">
+                    <input type="text" id="message-input" placeholder="Type your message here..." required>
+                    <button type="submit" id="btn-msg-send" >发送</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="panels">
+            <div class="config-panel">
+                模型选择
+                <select id="model-select"></select>
+            
+            </div>
+          
+            <div class="status-panel">
+                使用限额:<span id="usage-limit"></span>
+                已用:<span id="usage-used"></span>
+                消息条数:<span id="message-count"></span>
+                聊天时长:<span id="chat-duration"></span>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
