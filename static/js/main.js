@@ -13,13 +13,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // 初始化调用
 async function init() {
-  
+
+    // 5分钟的毫秒数
+    const interval = 5 * 60 * 1000;
+
     // 获取用量
     await getUsage();
-  
-    // 其他初始化代码
-  
-  }
+
+    // 每隔一段时间调用
+    setInterval(() => {
+        // 计算当前时间
+        const now = new Date();
+        // 应用8小时时区偏移
+        now.setTime(now.getTime() + 8 * 60 * 60 * 1000);
+
+        console.log("Call getUsage func every 5 mins");
+        getUsage();
+
+    }, interval);
+
+}
 
 // 发送消息的异步函数
 async function sendMessage(event) {
@@ -28,19 +41,19 @@ async function sendMessage(event) {
     const chatMsg = document.getElementById('chat-messages');
 
     chatMsg.autoScroll = true;
-    
+
     // 消息容器滚动事件处理
-    chatMsg.addEventListener('scroll', function() {
+    chatMsg.addEventListener('scroll', function () {
         // 用户手动滚动时取消自动滚动
-        chatMsg.autoScroll = false; 
+        chatMsg.autoScroll = false;
     });
-  
+
     const message = messageInput.value;
     messageInput.value = '';
 
     const userMessage = document.createElement('div');
     //用户在左边显示
-    userMessage.classList.add('user-message'); 
+    userMessage.classList.add('user-message');
     userMessage.textContent = `User: ${message}`;
     chatMsg.appendChild(userMessage);
 
@@ -58,12 +71,12 @@ async function sendMessage(event) {
     // 在聊天界面添加一条新消息 
     const botMessage = document.createElement('div');
     //机器人在右边显示
-    botMessage.classList.add('bot-message'); 
+    botMessage.classList.add('bot-message');
     botMessage.textContent = `ChatGPT: ${data.message}`;
     chatMsg.appendChild(botMessage);
 
     // 检查是否需要自动滚动
-    if(chatMsg.autoScroll) {
+    if (chatMsg.autoScroll) {
         chatMsg.scrollTop = chatMsg.scrollHeight;;
     }
 
