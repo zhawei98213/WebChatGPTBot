@@ -1,5 +1,6 @@
 /* static/js/main.js */
 
+//将消息容器的获取移入 DOMContentLoaded 回调内,确保在 DOM 加载后获取
 document.addEventListener('DOMContentLoaded', async () => {
     const chatForm = document.getElementById('chat-form');
 
@@ -37,8 +38,10 @@ async function sendMessage(event) {
     const message = messageInput.value;
     messageInput.value = '';
 
-    const userMessage = document.createElement('p');
-    userMessage.textContent = `You: ${message}`;
+    const userMessage = document.createElement('div');
+    //用户在左边显示
+    userMessage.classList.add('user-message'); 
+    userMessage.textContent = `User: ${message}`;
     chatMsg.appendChild(userMessage);
 
     // 调用后端API发送消息
@@ -53,7 +56,9 @@ async function sendMessage(event) {
     // 获取并处理响应
     const data = await response.json();
     // 在聊天界面添加一条新消息 
-    const botMessage = document.createElement('p');
+    const botMessage = document.createElement('div');
+    //机器人在右边显示
+    botMessage.classList.add('bot-message'); 
     botMessage.textContent = `ChatGPT: ${data.message}`;
     chatMsg.appendChild(botMessage);
 

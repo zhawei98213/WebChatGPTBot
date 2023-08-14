@@ -31,6 +31,9 @@ CSS 设置聊天消息区域固定高度,并允许垂直滚动溢出
   border: 1px solid #ddd;
   padding: 10px;
   border-radius: 10px;
+  display: flex; 
+  flex-direction: column;
+
 }
 
 /* 输入区 */
@@ -75,4 +78,12 @@ button {
 
 button:hover {
   background: #0062cc;
+}
+
+.bot-message {
+  align-self: flex-end; 
+}
+
+.user-message {
+  align-self: flex-start; 
 }
