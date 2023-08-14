@@ -75,6 +75,8 @@ async function sendMessage(event) {
 // 获取用量信息
 async function getUsage() {
 
+    const usageInfo = document.getElementById('usage-info');
+
     const response = await fetch('/usage');
     const data = await response.json();
 

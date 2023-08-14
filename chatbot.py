@@ -2,6 +2,8 @@ import openai
 from typing import Dict
 from utils import load_config
 from exceptions import OpenAIRequestError, OpenAIResponseError
+import requests
+from datetime import datetime
 
 
 class ChatBot:
@@ -47,7 +49,29 @@ class ChatBot:
             raise OpenAIResponseError("Missing 'usage' in API response")
 
         return usage['usage']
-
+    
+    def get_usage_info(self) -> Dict:
+        #usage = openai.Usage.create(api_key=self.api_key)
+        
+        usage_url = "https://api.openai.com/v1/usage"
+        
+        headers = {
+            "Authorization": "Bearer " + self.api_key,
+            "Content-Type": "application/json"
+        }
+        
+        params = {
+            "date": datetime.today().strftime("%Y-%m-%d")  
+        }
+        
+        usage_response = requests.get(usage_url, headers=headers, params=params)
+        
+        if usage_response.status_code == 200:
+            data = usage_response.json()
+            return data
+        else:
+            return usage_response.text
+        
     def send_message(self, message: str) -> Dict[str, str]:
         """
         Send a message to the chatbot and get a response.
