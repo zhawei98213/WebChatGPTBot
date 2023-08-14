@@ -9,39 +9,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 初始化
     await init();
+    await getModels();
 
-    //前端通过 AJAX 请求获取模型列表:
-    fetch('/models')
-        .then(res => res.json())
-        .then(models => {
-
-            // 得到模型列表数据
-            console.log(models)
-
-        })
-
-    // 获取选择框
-    // 渲染选择框选项:
-    const select = document.getElementById('model-select');
-
-    // 渲染每个选项 
-    models.forEach(model => {
-        let option = document.createElement('option');
-        option.value = model;
-        option.text = model;
-
-        select.appendChild(option);
-    })
-
-    //选择模型后提交更新
-    select.onchange = function() {
-        const model = this.value;
-        
-        // 发请求更新模型
-        fetch('/update-model', {
-          body: { model } 
-        })
-      }
 });
 
 // 初始化调用
@@ -171,3 +140,34 @@ function buildUsageTable(data) {
 
     return table;
 }
+
+async function getModels() {
+    const res = await fetch('/models');
+    const models = await res.json();
+  
+    // 使用 models 
+
+    // 获取选择框
+    // 渲染选择框选项:
+    const select = document.getElementById('model-select');
+
+    // 渲染每个选项 
+    models.forEach(model => {
+        let option = document.createElement('option');
+        option.value = model;
+        option.text = model;
+
+        select.appendChild(option);
+    })
+
+    //选择模型后提交更新
+    select.onchange = function() {
+        const model = this.value;
+        
+        // 发请求更新模型
+        fetch('/update-model', {
+          body: { model } 
+        })
+      }
+
+  }

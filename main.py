@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, jsonify,render_template, request
 from chatbot import ChatBot
 from utils import load_config, validate_config
 import logging.config
