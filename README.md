@@ -1,1 +1,2 @@
 # WebChatGPTBot
+conda activate gptBot

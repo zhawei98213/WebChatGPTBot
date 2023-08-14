@@ -21,10 +21,12 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 消息区 */
+/* 消息区
+CSS 设置聊天消息区域固定高度,并允许垂直滚动溢出
+*/
 #chat-messages {
   height: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-bottom: 20px;
   border: 1px solid #ddd;
   padding: 10px;

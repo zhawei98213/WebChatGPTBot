@@ -2,9 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
     const chatForm = document.getElementById('chat-form');
-    
-    
-    const usageInfo = document.getElementById('usage-info');
 
     // 绑定发送消息的表单提交事件
     chatForm.addEventListener('submit', sendMessage);
@@ -28,6 +25,15 @@ async function sendMessage(event) {
     event.preventDefault();
     const messageInput = document.getElementById('message-input');
     const chatMsg = document.getElementById('chat-messages');
+
+    chatMsg.autoScroll = true;
+    
+    // 消息容器滚动事件处理
+    chatMsg.addEventListener('scroll', function() {
+        // 用户手动滚动时取消自动滚动
+        chatMsg.autoScroll = false; 
+    });
+  
     const message = messageInput.value;
     messageInput.value = '';
 
@@ -50,6 +56,11 @@ async function sendMessage(event) {
     const botMessage = document.createElement('p');
     botMessage.textContent = `ChatGPT: ${data.message}`;
     chatMsg.appendChild(botMessage);
+
+    // 检查是否需要自动滚动
+    if(chatMsg.autoScroll) {
+        chatMsg.scrollTop = chatMsg.scrollHeight;;
+    }
 
     // 清空输入
     messageInput.value = '';
