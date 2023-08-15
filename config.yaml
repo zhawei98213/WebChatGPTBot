@@ -1,6 +1,6 @@
 ## config.yaml
 openai:
-  api_key: "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"
+  api_key: "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"
   model: "gpt-3.5-turbo"
   #api_key: "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"
   #model: "gpt-4"
